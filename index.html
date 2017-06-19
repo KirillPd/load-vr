@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>VR</title>
+  <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+  <script src="https://unpkg.com/aframe-animation-component@3.2.1/dist/aframe-animation-component.min.js"></script>
+  <script src="./components/wave.js"></script>
+</head>
+
+<body>
+  <a-scene stats>
+    <a-assets>
+      <img id="model" src="./model/hagia-sophia_13.dae">
+    </a-assets>
+    <a-entity collada-model="#model"></a-entity>
+    <a-sky id="background" color="skyblue" shader="flat"></a-sky>
+    <a-camera wasd-controls="acceleration: 200" position="81.178 4.400 5.111" rotation="-5.278 -588.307 0"></a-camera>
+  </a-scene>
+</body>
+
+</html>

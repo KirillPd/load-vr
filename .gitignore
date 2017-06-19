@@ -1,0 +1,6 @@
+.history
+.DS_Store
+._*
+node_modules/
+.com.apple.timemachine.supported
+*~
