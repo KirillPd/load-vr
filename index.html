@@ -7,17 +7,84 @@
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
   <title>VR</title>
   <script src="https://aframe.io/releases/0.5.0/aframe.min.js"></script>
+  <style>
+    .btn {
+      position: absolute;
+      bottom: 110px;
+      right: 20px;
+      z-index: 100;
+      min-width: 102px;
+      padding: 10px;
+      font-size: 22px;
+      color: #fff;
+      border: none;
+      cursor: pointer;
+      background: url(data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg…28.58C245.82%2C12.34%2C233.93%2C0%2C218.19%2C0H27.27Z%22%2F%3E%3C%2Fsvg%3E) 50% 50%/70% 70% no-repeat rgba(0, 0, 0, .35);
+    }
+
+    .btn.btn--top {
+      bottom: auto;
+      top: 40px;
+    }
+
+    .btn:hover {
+      background-color: #666;
+    }
+
+    @media (max-width: 768px) {
+      .btn {
+        bottom: 20px;
+        right: 110px;
+        padding: 9px;
+      }
+    }
+  </style>
 </head>
 
 <body>
-  <a-scene stats>
+  <button id="btn-play" class="btn">Stop</button>
+  <button id="btn-frame" class="btn btn--top">Frames</button>
+  <a-scene>
     <a-assets>
-      <img id="model" src="./model/hagia-sophia_13.dae">
+      <img id="model" src="./model/office.dae">
     </a-assets>
-    <a-entity collada-model="#model"></a-entity>
+    <a-entity collada-model="#model" position="0 0 15.428"></a-entity>
     <a-sky id="background" color="skyblue" shader="flat"></a-sky>
-    <a-camera wasd-controls="acceleration: 200" position="81.178 4.400 5.111" rotation="-5.278 -588.307 0"></a-camera>
+    <!--<a-plane position="0 0 -4" rotation="-90 0 0" width="1000" height="1000" color="#C6A664"></a-plane>-->
+    <a-camera position="11.476 2.200 10.343" rotation="-0.581 -718.940 0"></a-camera>
   </a-scene>
+  <script>
+    var buttonPlay = document.getElementById('btn-play'),
+      buttonFrame = document.getElementById('btn-frame'),
+      scene = document.querySelector('a-scene'),
+      keyboardEvent = document.createEvent("KeyboardEvent");
+
+    buttonFrame.addEventListener('click', function (e) {
+      e.preventDefault();
+      var activeClass = 'clicked';
+
+      if (this.classList.contains(activeClass)) {
+        scene.removeAttribute('stats');
+      } else {
+        scene.setAttribute('stats', true);
+      }
+      this.classList.toggle(activeClass);
+    });
+
+    buttonPlay.addEventListener('click', function (e) {
+      e.preventDefault();
+      var stoppedClass = 'stopped';
+
+      if (this.classList.contains(stoppedClass)) {
+        this.innerText = 'Stop';
+        scene.play();
+      } else {
+        this.innerText = 'Play';
+        scene.pause();
+      }
+      this.classList.toggle(stoppedClass);
+    });
+  </script>
 </body>
 
 </html>
